@@ -1,0 +1,89 @@
+agents:
+  - # ── Identity ──────────────────────────────────────────────────────────────
+    # Agent name (required).
+    name: claude-code
+
+    # Python import path for a custom agent class (overrides `name`).
+    # Example: "mypackage.agents:MyAgent"
+    # import_path: null
+
+    # Model to use. Format: "provider/model-name" or just "model-name".
+    # Defaults to the agent's built-in default when omitted.
+    # model_name: claude-sonnet-4-5
+
+    # ── Timeouts ──────────────────────────────────────────────────────────────
+    # Hard override for the agent execution time limit (seconds).
+    # Completely replaces the task's default timeout.
+    # Default: uses the task's own timeout_sec value.
+    override_timeout_sec: 1200 # 20 minutes
+
+
+    # Hard override for the agent setup/install phase timeout (seconds).
+    # Default: uses the task's own setup timeout value.
+    # override_setup_timeout_sec: 300
+
+    # Upper cap on agent execution time (seconds).
+    # Only clips downward — won't raise the timeout above the task default.
+    # Default: no cap (infinity).
+    # max_timeout_sec: 3600
+
+    # ── Claude-Code specific kwargs ───────────────────────────────────────────
+    # kwargs:
+    #   # Maximum number of agentic turns before the agent stops.
+    #   # Default: unlimited (claude-code default).
+    #   max_turns: 50
+    #
+    #   # Reasoning effort for extended-thinking models (--effort flag).
+    #   # Choices: "low" | "medium" | "high"
+    #   # Default: not set (inherits model default).
+    #   reasoning_effort: medium
+    #
+    #   # Maximum spend cap per run in USD (--max-budget-usd flag).
+    #   # Default: no cap.
+    #   max_budget_usd: "5.00"
+    #
+    #   # Fallback model if the primary model is unavailable.
+    #   # Default: none.
+    #   fallback_model: claude-haiku-4-5
+    #
+    #   # Extra text appended to the system prompt (--append-system-prompt flag).
+    #   # Default: none.
+    #   append_system_prompt: "Always output code in English."
+    #
+    #   # Comma-separated list of tools the agent IS allowed to use.
+    #   # Default: all tools allowed.
+    #   allowed_tools: "Bash,Edit,Write"
+    #
+    #   # Comma-separated list of tools the agent must NOT use.
+    #   # Default: none blocked.
+    #   disallowed_tools: "WebSearch"
+    #
+    #   # Token budget for extended thinking (env var MAX_THINKING_TOKENS).
+    #   # Default: not set.
+    #   max_thinking_tokens: 10000
+    #
+    #   # Pin a specific claude-code CLI version to install.
+    #   # Default: latest.
+    #   # version: "1.2.3"
+    #
+    #   # Path inside the environment to a directory of SKILL.md files
+    #   # injected into Claude's config before the run.
+    #   # Default: none.
+    #   # skills_dir: "/app/.harbor/skills"
+    #
+    #   # MCP servers to register with the agent before the run starts.
+    #   # Default: none.
+    #   # mcp_servers:
+    #   #   - name: my-sse-server
+    #   #     transport: sse              # "sse" | "streamable-http" | "stdio"
+    #   #     url: http://localhost:8080
+    #   #   - name: my-stdio-server
+    #   #     transport: stdio
+    #   #     command: python3
+    #   #     args: ["-m", "my_mcp_server"]
+
+    # ── Environment variables passed to the agent process ─────────────────────
+    # Default: none (inherits from the host environment via devcontainer.env).
+    # env:
+    #   ANTHROPIC_API_KEY: "sk-ant-..."
+    #   AWS_REGION: us-east-1

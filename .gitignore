@@ -1,0 +1,16 @@
+**/jobs
+./jobs
+.grepai/
+everything-claude-code/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+.idea/
+*.sublime-project

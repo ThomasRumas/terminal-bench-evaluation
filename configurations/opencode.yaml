@@ -1,0 +1,87 @@
+agents:
+  - # ── Identity ──────────────────────────────────────────────────────────────
+    # Agent name (required).
+    name: opencode
+
+    # Python import path for a custom agent class (overrides `name`).
+    # Example: "mypackage.agents:MyAgent"
+    # import_path: null
+
+    # Model to use. REQUIRED for opencode — must be in "provider/model" format.
+    # Supported providers and their required env vars:
+    #   anthropic        → ANTHROPIC_API_KEY
+    #   openai           → OPENAI_API_KEY
+    #   google           → GEMINI_API_KEY / GOOGLE_API_KEY / etc.
+    #   azure            → AZURE_RESOURCE_NAME, AZURE_API_KEY
+    #   amazon-bedrock   → AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+    #   deepseek         → DEEPSEEK_API_KEY
+    #   github-copilot   → GITHUB_TOKEN
+    #   groq             → GROQ_API_KEY
+    #   huggingface      → HF_TOKEN
+    #   llama            → LLAMA_API_KEY
+    #   mistral          → MISTRAL_API_KEY
+    #   xai              → XAI_API_KEY
+    #   openrouter       → OPENROUTER_API_KEY
+    model_name: anthropic/claude-sonnet-4-5
+
+    # ── Timeouts ──────────────────────────────────────────────────────────────
+    # Hard override for the agent execution time limit (seconds).
+    # Completely replaces the task's default timeout.
+    # Default: uses the task's own timeout_sec value.
+    override_timeout_sec: 1200 # 20 minutes
+
+
+    # Hard override for the agent setup/install phase timeout (seconds).
+    # Default: uses the task's own setup timeout value.
+    # override_setup_timeout_sec: 300
+
+    # Upper cap on agent execution time (seconds).
+    # Only clips downward — won't raise the timeout above the task default.
+    # Default: no cap (infinity).
+    # max_timeout_sec: 3600
+
+    # ── OpenCode specific kwargs ───────────────────────────────────────────────
+    # kwargs:
+    #   # Pin a specific opencode-ai npm package version to install.
+    #   # Default: @latest.
+    #   # version: "0.1.93"
+    #
+    #   # Path inside the environment to a directory of skill files
+    #   # copied to ~/.config/opencode/skills/ before the run.
+    #   # Default: none.
+    #   # skills_dir: "/app/.harbor/skills"
+    #
+    #   # Arbitrary JSON config deep-merged into ~/.config/opencode/opencode.json
+    #   # before the run. Use this to pass any opencode config option.
+    #   # See https://opencode.ai/docs for the full schema.
+    #   # Default: {} (empty — opencode defaults apply).
+    #   # opencode_config:
+    #   #   experimental:
+    #   #     continue_loop_on_deny: true
+    #   #   # Extra provider/model registration (auto-set from model_name above,
+    #   #   # but can be extended here for custom endpoints).
+    #   #   provider:
+    #   #     anthropic:
+    #   #       models:
+    #   #         claude-sonnet-4-5: {}
+    #
+    #   # MCP servers made available to the agent.
+    #   # Written into ~/.config/opencode/opencode.json under the "mcp" key.
+    #   # Default: none.
+    #   # mcp_servers:
+    #   #   - name: my-sse-server
+    #   #     transport: sse              # "sse" | "streamable-http" | "stdio"
+    #   #     url: http://localhost:8080
+    #   #   - name: my-stdio-server
+    #   #     transport: stdio
+    #   #     command: python3
+    #   #     args: ["-m", "my_mcp_server"]
+
+    # ── Environment variables passed to the agent process ─────────────────────
+    # The provider API key is automatically picked up from the host environment
+    # (via devcontainer.env) based on the provider in model_name.
+    # Add extra vars here only if needed.
+    # Default: none (auto-picked from host env based on provider).
+    # env:
+    #   ANTHROPIC_API_KEY: "sk-ant-..."
+    #   AWS_REGION: us-east-1
