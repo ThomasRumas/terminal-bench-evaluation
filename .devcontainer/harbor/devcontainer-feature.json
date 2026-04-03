@@ -1,0 +1,23 @@
+{
+    "id": "harbor",
+    "version": "1.0.0",
+    "name": "Harbor",
+    "description": "Installs the Harbor evaluation framework. Depends on Python 3 and Docker-in-Docker.",
+    "options": {
+        "harborVersion": {
+            "type": "string",
+            "default": "latest",
+            "description": "Harbor PyPI version to install. Use 'latest' for the newest release."
+        }
+    },
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "latest",
+            "installTools": true
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "dockerDashComposeVersion": "v2"
+        }
+    }
+}
