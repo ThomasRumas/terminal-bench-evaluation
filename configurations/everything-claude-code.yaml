@@ -1,11 +1,11 @@
 agents:
   - # ── Identity ──────────────────────────────────────────────────────────────
     # Agent name (required).
-    name: claude-code
+    name: everything-claude-code
 
-    # Python import path for a custom agent class (overrides `name`).
-    # Example: "mypackage.agents:MyAgent"
-    # import_path: null
+    # everything-claude-code addon: custom agent clones ECC inside the container
+    # and injects all 156 skills before Claude Code starts.
+    import_path: "everything_claude_code_agent:ClaudeCodeWithECC"
 
     # Model to use. Format: "provider/model-name" or just "model-name".
     # Defaults to the agent's built-in default when omitted.
